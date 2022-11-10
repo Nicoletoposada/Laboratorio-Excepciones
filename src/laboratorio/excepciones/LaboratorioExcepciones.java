@@ -7,11 +7,14 @@ public class LaboratorioExcepciones
 {
     public static void main(String args[])
     {
+        //METODOS A REALIZAR
+        
         //formatoNumero();
         //formatoNumeroCorregido();
         //desborde();
         //aritmetico();
-        JOptionPane.showMessageDialog(null ,division(JOptionPane.showInputDialog("Digite un numero entero"), JOptionPane.showInputDialog("Digite el divisor")));
+        //division();
+        //JOptionPane.showMessageDialog(null ,ExcepcionPropia(JOptionPane.showInputDialog("Digite un numero entero"), JOptionPane.showInputDialog("Digite el divisor")));
     }   
 
     //1. excepción sin tratar 
@@ -68,12 +71,48 @@ public class LaboratorioExcepciones
         }
     }
     
-    //5. Excepcion propia
-    public static double division(String entero, String divisor)
+    //5. Sin Excepcion propia
+    public static void division()
     {
-        double en = 0;
-        double div = 0;
-        double resul = 0;
+        String en = JOptionPane.showInputDialog("Digite un numero entero");
+        String div = JOptionPane.showInputDialog("DIgite el divisor");
+        int e, d, resul = 0;
+        
+        try
+        {
+            e = Integer.parseInt(en);
+        }
+        catch(NumberFormatException ex)
+        {
+            System.out.println("El entero no es un entero." + ex.getMessage());
+        }
+        try
+        {
+            d = Integer.parseInt(div);
+        }
+        catch(NumberFormatException ex)
+        {
+            System.out.println("El divisor no es un entero." + ex.getMessage());
+        }
+        try
+        {
+            e = Integer.parseInt(en);
+            d = Integer.parseInt(div);
+            resul = e / d;
+        }
+        catch(ArithmeticException ex)
+        {
+            System.out.println("No se puede dividir entre 0." + ex.getMessage());
+        }
+    }
+    
+    //5. Con Expecion propia
+    public static double ExcepcionPropia(String entero, String divisor)
+    {
+        int en = 0;
+        int div = 0;
+        int resul = 0;
+        
         try
         {
             en = Integer.parseInt(entero);
@@ -93,20 +132,20 @@ public class LaboratorioExcepciones
         try
         {
             resul = en / div;
+        }
+        catch(ArithmeticException ex)
+        {
+            System.out.println("No se puede dividir entre 0." + ex.getMessage());
+        }
+        try
+        {
+            resul = en / div;
             MenorException.menor10(resul);
         }
         catch(IOException ex)
         {
             System.out.println("El resultado es menor a 10");
         }
-        try
-        {
-            resul = en / div;
-        }
-        catch(ArithmeticException ex)
-        {
-            System.out.println("No se puede dividir entre 0." + ex.getMessage());
-        }
         return resul;
-    }    
+    }
 }
